@@ -2,8 +2,11 @@ module.exports = {
   extends: [
     'airbnb-typescript/base',
     '@react-native',
+    'plugin:import/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:prettier/recommended'
   ],
+  plugins: ['jest', '@typescript-eslint'],
   rules: {
     'prettier/prettier': [
       'error',
@@ -22,5 +25,7 @@ module.exports = {
     sourceType: 'module',
     project: ['./tsconfig.json', './test/tsconfig.json'],
   },
-  
+  settings: {
+    'import/ignore': ['react-native'],
+  }
 }
