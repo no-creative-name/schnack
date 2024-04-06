@@ -6,6 +6,12 @@
     },
     "build": {
       "outputs": ["dist/**"]
+    },
+    "docker:build": {
+      "outputs": []
+    },
+    "docker:push": {
+      "outputs": []
     }
   }
 }

@@ -1,0 +1,46 @@
+name: Build and push Docker images to Registry (Main)
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push-docker:
+    name: Build image and push to docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to Github Packages
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3.0.0
+        with:
+          version: latest
+
+      - name: Install
+        run: pnpm i
+
+      - name: Docker Build Tag for server
+        run: pnpm turbo docker:build --filter='./apps/server'
+
+      - name: Docker Push Tag for server
+        run: pnpm turbo docker:push --filter='./apps/server'
