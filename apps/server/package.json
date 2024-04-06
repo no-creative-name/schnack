@@ -19,7 +19,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docker:build": "tar --exclude='.git' -cf - ../.. | cross-var docker buildx build --load -f apps/server/Dockerfile - -t ghcr.io/no-creative-name/schnack-server:$npm_package_version",
-    "docker:run": "docker run -p 8000:8000 ghcr.io/no-creative-name/schnack-server:$npm_package_version"
+    "docker:run": "docker run -p 8000:8000 ghcr.io/no-creative-name/schnack-server:$npm_package_version",
+    "docker:push": "docker push ghcr.io/no-creative-name/schnack-server --all-tags"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
