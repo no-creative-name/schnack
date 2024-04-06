@@ -10,6 +10,9 @@
     "docker:build": "turbo run docker:build",
     "docker:push": "turbo run docker:push"
   },
+  "devDependencies": {
+    "turbo": "1.13.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
